@@ -13,14 +13,14 @@ public class Main {
 
         SpringApplication.run(Main.class, args);}
 
-        String report = """
-			Hi
+        String msg = """
+			The sun is shining and I feel happy today.
 			""";
 
         @Bean
         public CommandLineRunner commandLineRunner(ChatClient.Builder chatClientBuilder) {
             return args -> {
-                new ChainWorkflow(chatClientBuilder.build()).chain(report);
+                new ChainWorkflow(chatClientBuilder.build()).chain(msg);
             };
     }
 }

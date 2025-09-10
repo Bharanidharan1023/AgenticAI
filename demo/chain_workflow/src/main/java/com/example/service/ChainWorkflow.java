@@ -9,19 +9,25 @@ public class ChainWorkflow {
 
     private static final String[] DEFAULT_SYSTEM_PROMPTS = {
 
-            // Step 1
+            // Step 1: Translate to French
             """
-					say 1,
-					""",
-            // Step 2
+            Translate the following text into French.
+            """,
+
+                    // Step 2: Convert translation into uppercase
+                    """
+            Convert the following text into uppercase.
+            """,
+
+                    // Step 3: Make it sound poetic
+                    """
+            Rewrite the following text in a poetic style.
+            """,
+
+                    // Step 4: Give a motivational ending
+                    """
+            Add a short motivational ending to the text.
             """
-					say 2""",
-            // Step 3
-            """
-					say 3""",
-            // Step 4
-            """
-					say 4""",
     };
 
     private final ChatClient chatClient;

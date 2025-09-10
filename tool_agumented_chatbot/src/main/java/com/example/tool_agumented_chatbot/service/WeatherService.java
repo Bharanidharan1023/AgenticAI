@@ -21,10 +21,7 @@ public class WeatherService {
         return (request) -> {
             System.out.println("EXECUTING TOOL: Getting weather for city: " + request.city());
 
-            // In a real app, you would call a real weather API here.
-            // For this example, we'll return mock data.
             if (request.city().equalsIgnoreCase("Chennai")) {
-                // It's late evening in Chennai on a September night, so it's probably warm.
                 return new WeatherResponse(29.0, "Celsius", "Partly Cloudy");
             } else if (request.city().equalsIgnoreCase("London")) {
                 return new WeatherResponse(14.0, "Celsius", "Light Rain");

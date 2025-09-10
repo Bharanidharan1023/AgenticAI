@@ -3,13 +3,18 @@ package com.example;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.WebApplicationType;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import java.util.List;
 
+@SpringBootApplication
 public class Main {
     public static void main(String[] args) {
-        SpringApplication.run(Main.class, args);
+        SpringApplication app = new SpringApplication(Main.class);
+        app.setWebApplicationType(WebApplicationType.NONE);
+        app.run(args);
     }
 
     @Bean
@@ -19,38 +24,17 @@ public class Main {
 
             List<String> parallelResponse = new ParallelizationlWorkflow(chatClientBuilder.build())
                     .parallel("""
-							Analyze how market changes will impact this stakeholder group.
-							Provide specific impacts and recommended actions.
-							Format with clear sections and priorities.
-							""",
+                                     Rewrite the input text in the following way:
+                                                    1. Simplify for a 10-year-old.
+                                                    2. Translate to Hindi.
+                                                    3. Translate to French.
+                                                    4. Make it sound funny.""",
                             List.of(
-                                    """
-                                            Customers:
-                                            - Price sensitive
-                                            - Want better tech
-                                            - Environmental concerns
-                                            """,
-
-                                    """
-                                            Employees:
-                                            - Job security worries
-                                            - Need new skills
-                                            - Want clear direction
-                                            """,
-
-                                    """
-                                            Investors:
-                                            - Expect growth
-                                            - Want cost control
-                                            - Risk concerns
-                                            """,
-
-                                    """
-                                            Suppliers:
-                                            - Capacity constraints
-                                            - Price pressures
-                                            - Tech transitions
-                                            """),
+                                    "The future of artificial intelligence will change how humans work.",
+                                    "Space exploration opens new opportunities for science and business.",
+                                    "Climate change is the biggest challenge of our generation.",
+                                    "Healthy eating improves focus, energy, and long-term well-being."
+                                   ),
                             4);
 
             System.out.println(parallelResponse);
